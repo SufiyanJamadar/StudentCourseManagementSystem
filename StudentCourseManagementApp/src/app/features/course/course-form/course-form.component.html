@@ -1,0 +1,88 @@
+<div class="teacher-form-container">
+  <h2>{{ course.id ? "Edit Course" : "Create Course" }}</h2>
+
+  <form (ngSubmit)="saveCourse()" #teacherForm="ngForm">
+    <!-- Name Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="course.name"
+        name="name"
+        required
+        minlength="3"
+        #name="ngModel"
+      />
+      <mat-error *ngIf="name.invalid && (name.touched || name.dirty)">
+        <div *ngIf="name.errors?.['required']">Name is required.</div>
+        <div *ngIf="name.errors?.['minlength']">
+          Name must be at least 3 characters long.
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Experience Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>DurationInDays (Days)</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="course.durationInDays"
+        name="durationInDays"
+        required
+        min="0"
+        #experienceInYears="ngModel"
+      />
+      <mat-error
+        *ngIf="
+          experienceInYears.invalid &&
+          (experienceInYears.touched || experienceInYears.dirty)
+        "
+      >
+        <div *ngIf="experienceInYears.errors?.['required']">
+          durationInDays is required.
+        </div>
+        <div *ngIf="experienceInYears.errors?.['min']">
+          durationInDays must be a positive number.
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Rating Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Daily Hours</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="course.dailyHours"
+        name="rating"
+        required
+        min="0"
+        max="10"
+        #rating="ngModel"
+      />
+      <mat-error *ngIf="rating.invalid && (rating.touched || rating.dirty)">
+        <div *ngIf="rating.errors?.['required']">Daily Hours is required.</div>
+        <div *ngIf="rating.errors?.['min'] || rating.errors?.['max']">
+          DailyHours must be between 0 and 12.
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="teacherForm.invalid"
+    >
+      Save
+    </button>
+
+    <!-- Cancel Button -->
+    <button mat-raised-button type="button" (click)="resetForm()">
+      Cancel
+    </button>
+  </form>
+</div>

@@ -1,0 +1,58 @@
+/* Container for the register card */
+.register-card {
+    max-width: 600px; /* Adjusted width */
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  
+  /* Title styling */
+  .register-card h2 {
+    text-align: center;
+    color: #3f51b5; /* Primary color */
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+  
+  /* Form field styling */
+  .form-field {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Submit button styling */
+  .submit-button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #3f51b5; /* Primary color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #303f9f; /* Darker shade for hover */
+  }
+  
+  .submit-button:disabled {
+    background-color: #b0b0b0; /* Disabled state */
+    cursor: not-allowed;
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .register-card {
+      padding: 1rem;
+    }
+  
+    .register-card h2 {
+      font-size: 1.5rem;
+    }
+  }

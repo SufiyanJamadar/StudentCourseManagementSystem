@@ -1,0 +1,41 @@
+<mat-card class="register-card">
+  <h2>Register CourseTeachers</h2>
+  <form [formGroup]="courseTeacherForm" (ngSubmit)="registerCourseTeacher()">
+    <!-- Course Dropdown -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Course</mat-label>
+      <mat-select formControlName="courseId" required>
+        <mat-option *ngFor="let course of courses" [value]="course.id">
+          {{ course.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="courseTeacherForm.get('courseId')?.invalid">
+        Course is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Teacher Dropdown -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Teacher</mat-label>
+      <mat-select formControlName="teacherId" required>
+        <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">
+          {{ teacher.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="courseTeacherForm.get('teacherId')?.invalid">
+        Teacher is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="courseTeacherForm.invalid"
+      class="submit-button"
+    >
+      Register
+    </button>
+  </form>
+</mat-card>

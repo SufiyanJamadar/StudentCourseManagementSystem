@@ -1,0 +1,46 @@
+<div class="student-list-container">
+  <h2>Students List</h2>
+  <button mat-raised-button color="primary" (click)="createStudent()">
+    Create Student
+  </button>
+
+  <mat-spinner *ngIf="loading" diameter="40"></mat-spinner>
+
+  <!-- <mat-form-field appearance="outline" class="search-bar">
+    <mat-label>Search</mat-label>
+    <input matInput [(ngModel)]="searchQuery" (input)="applyFilter()" />
+  </mat-form-field> -->
+
+  <mat-table *ngIf="!loading" [dataSource]="students" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let student"> {{ student.id }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{ student.name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{ student.email }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let student">
+        <button mat-button color="primary" (click)="editStudent(student)">
+          Edit
+        </button>
+        <button mat-button color="warn" (click)="deleteStudent(student.id)">
+          Delete
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="['id', 'name', 'email', 'actions']"
+    ></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: ['id', 'name', 'email', 'actions']"
+    ></mat-row>
+  </mat-table>
+</div>

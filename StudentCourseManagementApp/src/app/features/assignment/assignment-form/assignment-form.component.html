@@ -1,0 +1,66 @@
+<div class="assignment-form-container">
+  <h2>{{ isEditMode ? "Edit Assignment" : "Create Assignment" }}</h2>
+
+  <form [formGroup]="assignmentForm" (ngSubmit)="saveAssignment()">
+    <!-- Description Field -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" required />
+      <mat-error *ngIf="assignmentForm.get('description')?.invalid">
+        Description is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Course ID Field -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Course ID</mat-label>
+      <input matInput type="number" formControlName="courseId" required />
+      <mat-error *ngIf="assignmentForm.get('courseId')?.invalid">
+        Course ID is required and must be a positive number.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Deadline Field -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Deadline</mat-label>
+      <input
+        matInput
+        [matDatepicker]="deadlinePicker"
+        formControlName="deadline"
+        required
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="deadlinePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #deadlinePicker></mat-datepicker>
+      <mat-error *ngIf="assignmentForm.get('deadline')?.invalid">
+        Deadline is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="assignmentForm.invalid || loading"
+      class="submit-button"
+    >
+      {{ isEditMode ? "Update" : "Create" }}
+    </button>
+
+    <!-- Cancel Button -->
+    <button
+      mat-raised-button
+      type="button"
+      (click)="resetForm()"
+      class="cancel-button"
+    >
+      Cancel
+    </button>
+  </form>
+
+  <!-- Loading Spinner -->
+  <mat-spinner *ngIf="loading" diameter="40"></mat-spinner>
+</div>

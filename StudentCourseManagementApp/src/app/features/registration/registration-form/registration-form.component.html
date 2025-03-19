@@ -1,0 +1,54 @@
+<mat-card class="register-card">
+  <h2>Register Form</h2>
+  <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
+    <!-- Student Dropdown -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Student</mat-label>
+      <mat-select formControlName="studentId" required>
+        <mat-option *ngFor="let student of students" [value]="student.id">
+          {{ student.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="registrationForm.get('studentId')?.invalid">
+        Student is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Course Dropdown -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Course</mat-label>
+      <mat-select formControlName="courseId" required>
+        <mat-option *ngFor="let course of courses" [value]="course.id">
+          {{ course.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="registrationForm.get('courseId')?.invalid">
+        Course is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Teacher Dropdown -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Teacher</mat-label>
+      <mat-select formControlName="teacherId" required>
+        <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">
+          {{ teacher.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="registrationForm.get('teacherId')?.invalid">
+        Teacher is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="registrationForm.invalid"
+      class="submit-button"
+    >
+      Register
+    </button>
+  </form>
+</mat-card>

@@ -1,0 +1,88 @@
+<div class="teacher-form-container">
+  <h2>{{ teacher.id ? "Edit Teacher" : "Create Teacher" }}</h2>
+
+  <form (ngSubmit)="saveTeacher()" #teacherForm="ngForm">
+    <!-- Name Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="teacher.name"
+        name="name"
+        required
+        minlength="3"
+        #name="ngModel"
+      />
+      <mat-error *ngIf="name.invalid && (name.touched || name.dirty)">
+        <div *ngIf="name.errors?.['required']">Name is required.</div>
+        <div *ngIf="name.errors?.['minlength']">
+          Name must be at least 3 characters long.
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Experience Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Experience (Years)</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="teacher.experienceInYears"
+        name="experienceInYears"
+        required
+        min="0"
+        #experienceInYears="ngModel"
+      />
+      <mat-error
+        *ngIf="
+          experienceInYears.invalid &&
+          (experienceInYears.touched || experienceInYears.dirty)
+        "
+      >
+        <div *ngIf="experienceInYears.errors?.['required']">
+          Experience is required.
+        </div>
+        <div *ngIf="experienceInYears.errors?.['min']">
+          Experience must be a positive number.
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Rating Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Rating</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="teacher.rating"
+        name="rating"
+        required
+        min="0"
+        max="10"
+        #rating="ngModel"
+      />
+      <mat-error *ngIf="rating.invalid && (rating.touched || rating.dirty)">
+        <div *ngIf="rating.errors?.['required']">Rating is required.</div>
+        <div *ngIf="rating.errors?.['min'] || rating.errors?.['max']">
+          Rating must be between 0 and 10.
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="teacherForm.invalid"
+    >
+      Save
+    </button>
+
+    <!-- Cancel Button -->
+    <button mat-raised-button type="button" (click)="resetForm()">
+      Cancel
+    </button>
+  </form>
+</div>
