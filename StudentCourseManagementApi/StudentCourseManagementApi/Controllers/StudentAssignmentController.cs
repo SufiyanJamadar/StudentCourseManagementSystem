@@ -19,7 +19,7 @@ namespace StudentCourseManagementApi.Controllers
         }
 
         // GET All StudentAssignments
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<StudentAssignmentResponseDto>>> GetAllStudentsAssighments()
         {
 
@@ -41,7 +41,7 @@ namespace StudentCourseManagementApi.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("getStudentById/{id}")]
         public async Task<ActionResult<StudentAssignmentResponseDto>> GetStudentAssignment(int id)
         {
             var studentAssignment = await _context.StudentAssignments
@@ -63,7 +63,7 @@ namespace StudentCourseManagementApi.Controllers
             return Ok(responseDto);
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult<StudentAssignmentResponseDto>> CreateStudentAssignment(StudentAssignmentDto studentAssignmentDto)
         {
             // check if the AssighmentId and StudentId are valid or not
@@ -102,7 +102,7 @@ namespace StudentCourseManagementApi.Controllers
 
 
 
-        [HttpPut("{id}")]
+        [HttpPut("update/{id}")]
         public async Task<ActionResult<StudentAssignmentResponseDto>> UpdateStudentAssignment(int id, StudentAssignmentDto studentAssignmentDto)
         {
             var studentAssignment = await _context.StudentAssignments.FirstOrDefaultAsync(x => x.Id == id);
@@ -126,7 +126,7 @@ namespace StudentCourseManagementApi.Controllers
 
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteStudentAssighment(int id)
         {
             var studentassighment = await _context.StudentAssignments.FindAsync(id);

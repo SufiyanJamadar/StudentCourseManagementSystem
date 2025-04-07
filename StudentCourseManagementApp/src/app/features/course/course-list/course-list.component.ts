@@ -49,16 +49,6 @@ export class CourseListComponent implements OnInit {
     });
   }
 
-  // editCourse(teacher: Course) {
-  //   this.courseService.update(teacher.id, teacher).subscribe(() => {
-  //     this.snackBar.open('Course Updated Successfully', '', {
-  //       duration: 3500,
-  //     });
-  //     this.loadCourse();
-  //   });
-  //   this.router.navigate(['/courseform', teacher.id]);
-  // }
-
   editCourse(course: Course) {
     this.router.navigate(['/courseform', course.id]);
   }

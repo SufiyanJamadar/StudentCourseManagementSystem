@@ -1,0 +1,85 @@
+<div class="course-teacher-form-container">
+  <h2>
+    {{ isEditMode ? "Edit FinalResult Mapping" : "Create FinalResult Mapping" }}
+  </h2>
+
+  <form [formGroup]="finalresultForm" (ngSubmit)="saveFinalResult()">
+    <mat-select
+      formControlName="courseId"
+      required
+      [compareWith]="compareById"
+    ></mat-select>
+
+    <!-- Student Dropdown -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Student</mat-label>
+      <mat-select formControlName="studentId" required>
+        <mat-option *ngFor="let student of students" [value]="student.id">
+          {{ student.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="finalresultForm.get('studentId')?.invalid">
+        Student is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Course Dropdown -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Course</mat-label>
+      <mat-select formControlName="courseId" required>
+        <mat-option *ngFor="let course of courses" [value]="course.id">
+          {{ course.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="finalresultForm.get('courseId')?.invalid">
+        Course is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Grade Dropdown -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Grade Name</mat-label>
+      <mat-select formControlName="courseId" required>
+        <mat-option *ngFor="let grade of grades" [value]="grade">
+          {{ grade }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="finalresultForm.get('grade')?.invalid">
+        Grade is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Remarks Input -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Remarks</mat-label>
+      <textarea matInput formControlName="remarks" required></textarea>
+      <mat-error *ngIf="finalresultForm.get('remarks')?.invalid">
+        Remarks are required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Action Buttons -->
+    <div class="button-group">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="finalresultForm.invalid || loading"
+      >
+        {{ isEditMode ? "Update" : "Create" }}
+        <mat-icon *ngIf="loading" class="spinner">
+          <mat-spinner diameter="20"></mat-spinner>
+        </mat-icon>
+      </button>
+
+      <button
+        mat-raised-button
+        type="button"
+        (click)="resetForm()"
+        class="cancel-button"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

@@ -51,5 +51,5 @@ export class RegistrationListComponent implements OnInit {
     }
   }
 
-  updateRegistration() {}
+  editRegistration(id:number) {}
 }

@@ -7,6 +7,8 @@ export interface CourseTeachers {
   id: number;
   courseName: string;
   teacherName: string;
+  courseId: number;
+  teacherId: number;
 }
 
 @Injectable({
@@ -18,7 +20,7 @@ export class CourseTeachersService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.http.get<CourseTeachers[]>(`${this.apiUrl}`);
+    return this.http.get<CourseTeachers[]>(`${this.apiUrl}/all`);
   }
 
   courseTeacherRegistration(courseteacher: any): Observable<any> {
@@ -33,6 +35,10 @@ export class CourseTeachersService {
   }
 
   updateCourseTeacher(id: number, courseteacher: CourseTeachers) {
-    return this.http.put(`${this.apiUrl}/update/${id},`, courseteacher);
+    return this.http.put(`${this.apiUrl}/update/${id}`, courseteacher);
+  }
+
+  getCourseTeacherById(id: number): Observable<CourseTeachers> {
+    return this.http.get<CourseTeachers>(`${this.apiUrl}/${id}`);
   }
 }

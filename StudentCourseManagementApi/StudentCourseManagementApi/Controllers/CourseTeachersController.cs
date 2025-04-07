@@ -20,7 +20,7 @@ namespace StudentCourseManagementApi.Controllers
 
         // GET All CourseTeachers
 
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<CourseTeacherResponseDto>>> GetAllCourseTeachers()
         {
             var courseteachers = await _context.CourseTeachers
@@ -32,7 +32,8 @@ namespace StudentCourseManagementApi.Controllers
             {
                 Id = ct.Id,
                 CourseName = ct.Course.Name,
-                TeacherName = ct.Teacher.Name
+                TeacherName = ct.Teacher.Name,
+
 
             });
 
@@ -53,10 +54,13 @@ namespace StudentCourseManagementApi.Controllers
             }
 
             var responseDto = new CourseTeacherResponseDto
+
             {
                 Id = courseteacher.Id,
                 CourseName = courseteacher.Course.Name,
-                TeacherName = courseteacher.Teacher.Name
+                TeacherName = courseteacher.Teacher.Name,
+                CourseId = courseteacher.CourseId,
+                TeacherId = courseteacher.TeacherId
             };
 
             return Ok(responseDto);
@@ -67,9 +71,10 @@ namespace StudentCourseManagementApi.Controllers
         public async Task<ActionResult<CourseTeacherResponseDto>> CreateCourseTeacher(CourseTeacherDto courseTeacherDto)
         {
 
-            // chcek if tecaher or Course exists
+            // check if teacher or Course exists
 
-            var teacher = await _context.Teachers.FindAsync(courseTeacherDto.TeacherId);
+            var teacher = await _context.Teachers.FindAsync(courseTeacherDto.TeacherId);    
+
             var course = await _context.Courses.FindAsync(courseTeacherDto.CourseId);
 
             if (teacher == null || course == null)

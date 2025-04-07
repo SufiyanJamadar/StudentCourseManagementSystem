@@ -1,4 +1,4 @@
-﻿namespace StudentCourseManagementApi.Models
+﻿    namespace StudentCourseManagementApi.Models
 {
     public class CourseTeacher
     {

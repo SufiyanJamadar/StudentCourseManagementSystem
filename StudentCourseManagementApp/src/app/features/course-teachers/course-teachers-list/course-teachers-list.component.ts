@@ -18,6 +18,7 @@ import { MaterialModule } from '../../../material.module';
 export class CourseTeachersListComponent implements OnInit {
   courseTeacher: CourseTeachers[] = [];
   displayedColumns: string[] = ['id', 'courseName', 'teacherName', 'actions'];
+  loading = true;
 
   constructor(
     private courseTeacherService: CourseTeachersService,
@@ -47,6 +48,7 @@ export class CourseTeachersListComponent implements OnInit {
   }
 
   editCourseTeachers(id: number) {
+    console.log('Navigatin the edit withy ID', id);
     this.router.navigate(['/course-teachers-form', id]);
   }
 

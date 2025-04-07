@@ -1,0 +1,22 @@
+.sidebar-nav {
+    padding: 20px;
+  }
+  
+  .sidebar-nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar-nav li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar-nav a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .sidebar-nav a:hover {
+    text-decoration: underline;
+  }
+  

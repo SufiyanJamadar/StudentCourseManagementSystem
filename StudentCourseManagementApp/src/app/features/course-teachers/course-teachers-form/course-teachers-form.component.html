@@ -1,6 +1,18 @@
-<mat-card class="register-card">
-  <h2>Register CourseTeachers</h2>
-  <form [formGroup]="courseTeacherForm" (ngSubmit)="registerCourseTeacher()">
+<div class="course-teacher-form-container">
+  <h2>
+    {{
+      isEditMode
+        ? "Edit Course-Teacher Mapping"
+        : "Create Course-Teacher Mapping"
+    }}
+  </h2>
+
+  <form [formGroup]="courseTeacherForm" (ngSubmit)="saveCourseTeacher()">
+    <mat-select
+      formControlName="courseId"
+      required
+      [compareWith]="compareById"
+    ></mat-select>
     <!-- Course Dropdown -->
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Course</mat-label>
@@ -27,15 +39,28 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Submit Button -->
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="courseTeacherForm.invalid"
-      class="submit-button"
-    >
-      Register
-    </button>
+    <!-- Action Buttons -->
+    <div class="button-group">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="courseTeacherForm.invalid || loading"
+      >
+        {{ isEditMode ? "Update" : "Create" }}
+        <mat-icon *ngIf="loading" class="spinner">
+          <mat-spinner diameter="20"></mat-spinner>
+        </mat-icon>
+      </button>
+
+      <button
+        mat-raised-button
+        type="button"
+        (click)="resetForm()"
+        class="cancel-button"
+      >
+        Cancel
+      </button>
+    </div>
   </form>
-</mat-card>
+</div>
