@@ -14,5 +14,12 @@ namespace StudentCourseManagementApi.Controllers
         {
             this._context = context;
         }
+
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok("Hello from DemoController");
+        }
     }
 }
